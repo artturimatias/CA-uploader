@@ -1,0 +1,23 @@
+{
+  "name": "ca-uploader",
+  "version": "0.0.1",
+  "description": "CollectiveAccess file uploader",
+  "main": "file-upload.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/artturimatias/CA-uploader.git"
+  },
+  "author": "Ari Häyrinen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/artturimatias/CA-uploader/issues"
+  },
+  "homepage": "https://github.com/artturimatias/CA-uploader#readme",
+  "dependencies": {
+    "fast-csv": "^2.4.1",
+    "puppeteer": "^1.12.2"
+  }
+}
