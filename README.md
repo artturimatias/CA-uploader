@@ -13,12 +13,12 @@ The script uses [Puppeteer](https://github.com/GoogleChrome/puppeteer) for uploa
 
 
     git clone https://github.com/artturimatias/CA-uploader.git
-    cd CA-uploade
+    cd CA-uploader
     npm install
 
 
 ## Usage
-First you need to define the address of your CA instance and user credentials. These are defined in file.loader.js.
+First you need to define the address of your CA instance and user credentials. These are defined in loader.js.
 
 
     // CA username
@@ -30,7 +30,7 @@ First you need to define the address of your CA instance and user credentials. T
     // URL of your CA instance providence login page
     const login_url = "http://localhost/providence";
     
-    // URL of your CA instance object editor where you can add media representations
+    // URL of your CA instance object editor where you can add media representations (profile specific)
     const url = 'http://localhost/providence/index.php/editor/objects/ObjectEditor/Edit/Screen41/object_id/';
     
     // path of your local files
@@ -41,14 +41,14 @@ First you need to define the address of your CA instance and user credentials. T
 
 Project contains a sample csv file (links.csv) wiht sample files. You can test with your TEST ENVIRONMENT by typing:
     
-        node file-upload
+        node uploader.js
 
 
 This should open browser and you can see how files are uploaded :)
 
 ## running headless
 
-If you want to run headless (without seeing the browser), just edit this line:
+If you want to run headless (without seeing the browser), just change this line:
 
     const browser = await puppeteer.launch({headless: false});
 to this:

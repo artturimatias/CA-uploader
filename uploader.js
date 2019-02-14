@@ -12,11 +12,11 @@ const password = "";
 // URL of your CA instance login page
 const login_url = "http://localhost/providence";
 
-// URL of your CA instance object editor where you can add media representations
-const url = 'http://localhost/providence/index.php/editor/objects/ObjectEditor/Edit/Screen41/object_id/';
+// URL of your CA instance object editor where you can add media representations (installation specific)
+const url = 'http://localhost/providence/index.php/editor/objects/ObjectEditor/Edit/Screen42/object_id/';
 
 // path of your local files
-const path = '/media/sf_downloads/DuoPrev/'
+const path = 'files/'
 
 const filename = "links.csv"
 // ************************************************************************
@@ -30,48 +30,48 @@ var csvStream = csv()
 	})
 	.on("end", function(){
 		console.log("CSV read!");
-		main(links, function(failures) {
-				console.log("Done");
-			}));
+		main(links);
 	});
  
 stream.pipe(csvStream);
 
 async function main(data, cb) {
+	
+	var failures = [];
 		
-			
+	const browser = await puppeteer.launch({headless: false});
 
-		// open browser
-		const page = await browser.newPage();
-		await page.setViewport({width: 1600, height: 920})
-		await page.goto(login_url);
+	// open browser
+	const page = await browser.newPage();
+	await page.setViewport({width: 1600, height: 920})
+	await page.goto(login_url);
 
-		// log in
-		await page.type('[name="username"]', username);
-		await page.type('[name="password"]', password);
-		await Promise.all([
-		  page.click('a'),
-		  page.waitForNavigation()
-		]);
-		
-		
-		// for debugging, can be removed
-		await page.setRequestInterception(true);
-		
-		// for debugging, can be removed
-		page.on('response', response => {
-			if (response.url().includes("/object_id")) {
-				  console.log("response code: ", response.status());
-		  }
-		});
+	// log in
+	await page.type('[name="username"]', username);
+	await page.type('[name="password"]', password);
+	await Promise.all([
+	  page.click('a'),
+	  page.waitForNavigation()
+	]);
+	
+	
+	// for debugging, can be removed
+	await page.setRequestInterception(true);
+	
+	// for debugging, can be removed
+	page.on('response', response => {
+		if (response.url().includes("/object_id")) {
+			  console.log("response code: ", response.status());
+	  }
+	});
 
-		// for debugging, can be removed
-		page.on('request', request => {
-			if (request.method() == "POST") {
-				console.log(request.method() + ':' + request.url());
-			}
-			request.continue();
-		});
+	// for debugging, can be removed
+	page.on('request', request => {
+		if (request.method() == "POST") {
+			console.log(request.method() + ':' + request.url());
+		}
+		request.continue();
+	});
 
 
 	// upload images
@@ -112,14 +112,20 @@ async function main(data, cb) {
 					   
 				} catch(e) {
 						console.log('File upload failed: ' + e.message);
+						failures.push(image[1]);
 				}
 			} else {
 					console.log('File not found: ' + image[1]);
 			}
 		} else {
-			console.log("not found: " + path + image[1]));
+			console.log("not found: " + path + image[1]);
 		}
 	}
-	cb();
+	console.log("\nDone!\n")
+	console.log('Failed uploads:')
+	console.log(failures);
+
+	await browser.close();
+
 }
 
