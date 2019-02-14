@@ -91,7 +91,7 @@ async function main(data, cb) {
 					}
 					// set label
 					var label = image[0].replace(/"/g,'');
-					const textareas = await page.$$('textarea');
+					const textareas = await page.$$('.formLabel textarea');
 					await textareas[textareas.length-1].type(label);
 					// set filename
 					const inputs = await page.$$('input[type="file"]');
