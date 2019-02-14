@@ -34,7 +34,7 @@ First you need to define the address of your CA instance and user credentials. T
     const url = 'http://localhost/providence/index.php/editor/objects/ObjectEditor/Edit/Screen41/object_id/';
     
     // path of your local files
-    const path = '/media/sf_downloads/DuoPrev/'
+    const path = 'files/'
     
     // CSV filename
     const filename = "links.csv"
