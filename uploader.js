@@ -13,7 +13,7 @@ const password = "";
 const login_url = "http://localhost/providence";
 
 // URL of your CA instance object editor where you can add media representations (installation specific)
-const url = 'https://oscari.oscapps.jyu.fi/providence/index.php/editor/objects/ObjectEditor/Edit/Screen41/object_id/';
+const url = 'http://localhost/providence/index.php/editor/objects/ObjectEditor/Edit/Screen41/object_id/';
 
 // path of your local files
 const path = 'files/'
