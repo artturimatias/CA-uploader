@@ -18,6 +18,10 @@ const url = 'http://localhost/providence/index.php/editor/objects/ObjectEditor/E
 // path of your local files
 const path = 'files/'
 
+// how many files are uploaded before browser is re-created 
+// - for some reason upload page of my CA installation halted always after 50 images
+const chunk_size = 40
+
 const filename = "links.csv"
 // ************************************************************************
 
@@ -38,7 +42,7 @@ var csvStream = csv()
 stream.pipe(csvStream);
 
 async function loop(links) {
-	var i,j,temparray,chunk = 40;
+	var i,j,temparray,chunk = chunk_size;
 	for (i = 0, j = links.length; i<j; i+=chunk) {
 		temparray = links.slice(i,i+chunk);
 		// do whatever
